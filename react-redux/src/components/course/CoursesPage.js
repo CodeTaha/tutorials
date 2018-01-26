@@ -6,6 +6,10 @@ import {connect} from 'react-redux';
 import * as courseActions from '../../actions/courseActions';
 
 class CoursesPage extends React.Component {
+  static courseRow(course, index) {
+    return <div key={index}>{course.title}</div>;
+  }
+
   constructor(props, context) {
     super(props, context);
 
@@ -30,6 +34,7 @@ class CoursesPage extends React.Component {
     return (
       <div>
         <h1>Courses</h1>
+        {this.props.courses.map(CoursesPage.courseRow)}
         <h2>Add Course</h2>
         <input
           type="text"
@@ -44,6 +49,11 @@ class CoursesPage extends React.Component {
     );
   }
 }
+
+CoursesPage.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  courses: PropTypes.array.isRequired
+};
 
 function mapStateToProps(state, ownProps) {
   return {

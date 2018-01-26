@@ -2,6 +2,8 @@
  * Created by taha on 9/10/17.
  */
 import React, {PropTypes} from 'react';
+import {connect} from 'react-redux';
+import * as courseActions from '../../actions/courseActions';
 
 class CoursesPage extends React.Component {
   constructor(props, context) {
@@ -21,7 +23,7 @@ class CoursesPage extends React.Component {
   }
 
   onClickSave() {
-    alert(`Saving ${this.state.course.title}`);
+    this.props.dispatch(courseActions.createCourse(this.state.course));
   }
 
   render() {
@@ -43,4 +45,14 @@ class CoursesPage extends React.Component {
   }
 }
 
-export default CoursesPage;
+function mapStateToProps(state, ownProps) {
+  return {
+    courses: state.courses
+  };
+}
+
+/*const connectedStateAndProps = connect(mapStateToProps, mapsDispatchToProps);
+export default connectedStateAndProps(CoursesPage);*/
+// This can be written as
+
+export default connect(mapStateToProps)(CoursesPage);

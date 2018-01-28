@@ -27,7 +27,7 @@ class CoursesPage extends React.Component {
   }
 
   onClickSave() {
-    this.props.dispatch(courseActions.createCourse(this.state.course));
+    this.props.createCourse(this.state.course);
   }
 
   render() {
@@ -51,8 +51,8 @@ class CoursesPage extends React.Component {
 }
 
 CoursesPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  courses: PropTypes.array.isRequired
+  courses: PropTypes.array.isRequired,
+  createCourse: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
@@ -61,8 +61,14 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    createCourse: course => dispatch(courseActions.createCourse(course))
+  };
+}
+
 /*const connectedStateAndProps = connect(mapStateToProps, mapsDispatchToProps);
 export default connectedStateAndProps(CoursesPage);*/
 // This can be written as
 
-export default connect(mapStateToProps)(CoursesPage);
+export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);

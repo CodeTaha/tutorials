@@ -10,12 +10,12 @@ import {browserHistory} from "react-router";
 
 class CoursesPage extends React.Component {
 
-  constructor(props, context) {
-    super(props, context);
-  }
-
   static redirectToAddCoursePage() {
     browserHistory.push('/course');
+  }
+
+  constructor(props, context) {
+    super(props, context);
   }
 
   render() {

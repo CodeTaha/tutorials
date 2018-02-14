@@ -4,6 +4,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import _ from 'lodash';
 import * as courseActions from '../../actions/courseActions';
 import CourseForm from "./CourseForm";
 
@@ -16,6 +17,15 @@ class ManageCoursePage extends React.Component {
       course: Object.assign({}, this.props.course),
       errors: {}
     };
+
+    _.bindAll(this, 'updateCourseState');
+  }
+
+  updateCourseState(event) {
+    const field = event.target.name;
+    let course = this.state.course;
+    course[field] = event.target.value;
+    return this.setState({course: course});
   }
 
   render() {
@@ -24,6 +34,7 @@ class ManageCoursePage extends React.Component {
         allAuthors={this.props.authors}
         course={this.state.course}
         errors={this.state.errors}
+        onChange={this.updateCourseState}
       />
     );
   }

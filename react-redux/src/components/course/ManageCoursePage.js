@@ -8,6 +8,7 @@ import _ from 'lodash';
 import * as courseActions from '../../actions/courseActions';
 import CourseForm from "./CourseForm";
 import toastr from 'toastr';
+import {formatAuthorsForDropdown} from "../../selectors/selectors";
 
 export class ManageCoursePage extends React.Component {
 
@@ -105,16 +106,10 @@ function mapStateToProps(state, ownProps) {
   if (courseId && state.courses.length > 0) {
     course = getCourseById(state.courses, courseId);
   }
-  const authorsFormattedForDropdown = state.authors.map(author => {
-    return {
-      value: author.id,
-      text: author.firstName + ' ' + author.lastName
-    };
-  });
-
+  
   return {
     course: course,
-    authors: authorsFormattedForDropdown
+    authors: formatAuthorsForDropdown(state.authors)
   };
 }
 

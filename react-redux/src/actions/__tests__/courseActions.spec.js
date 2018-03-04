@@ -41,7 +41,7 @@ describe('Async Actions and Thunks', () => {
 
     const expectedActions = [
       {type: types.BEGIN_AJAX_CALL},
-      {type: types.LOAD_COURSES_SUCCESS, body: {courses: [{id: 'clean-code', title: 'Clean Code'}]}},
+      {type: types.LOAD_COURSES_SUCCESS, body: {courses: [{id: 'clean-code', title: 'Clean Code'}]}}
     ];
 
     const store = mockStore({courses: []}, expectedActions);
@@ -50,6 +50,6 @@ describe('Async Actions and Thunks', () => {
       expect(actions[0].type).toEqual(types.BEGIN_AJAX_CALL);
       expect(actions[1].type).toEqual(types.LOAD_COURSES_SUCCESS);
       done();
-    })
+    });
   });
 });
